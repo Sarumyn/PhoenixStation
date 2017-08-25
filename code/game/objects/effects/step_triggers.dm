@@ -73,8 +73,6 @@
 				if(!facedir)
 					AM.dir = predir
 
-
-
 		affecting.Remove(AM)
 
 		if(ismob(AM))

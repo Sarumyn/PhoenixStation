@@ -378,13 +378,6 @@
 	mymob.defense_icon.alpha = ui_alpha
 	src.hotkeybuttons += mymob.defense_icon
 
-//	mymob.fixeye = new /obj/screen()
-//	mymob.fixeye.icon = ui_style
-//	mymob.fixeye.icon_state = "fixeye"
-//	mymob.fixeye.name = "fixeye"
-//	mymob.fixeye.screen_loc = ui_face_direction
-	//AWWARE
-
 	mymob.internals = new /obj/screen()
 	mymob.internals.icon = ui_style
 	mymob.internals.icon_state = "internal0"
@@ -471,7 +464,7 @@
 
 	mymob.client.screen = list()
 	//AWWARE 3
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel ,mymob.defense_icon, mymob.fixeye, mymob.internals, mymob.healths, mymob.healthdoll, mymob.pullin, mymob.gun_setting_icon, lingchemdisplay, lingstingdisplay, mymob.fov) //, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel ,mymob.defense_icon, mymob.internals, mymob.healths, mymob.healthdoll, mymob.pullin, mymob.gun_setting_icon, lingchemdisplay, lingstingdisplay, mymob.fov) //, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
 	mymob.client.screen += src.adding + src.hotkeybuttons
 	mymob.client.screen += mymob.client.void
 	inventory_shown = 0
