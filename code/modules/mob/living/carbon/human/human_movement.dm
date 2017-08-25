@@ -72,6 +72,8 @@
 	if(shock_stage >= 10)
 		tally += round(log(3.5, shock_stage), 0.1) // (40 = ~3.0) and (starts at ~1.83)
 
+	if(facing_dir) tally += 3 //Locking direction will slow you down.
+
 	if(pull_debuff)
 		tally += pull_debuff
 

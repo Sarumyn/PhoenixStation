@@ -313,6 +313,9 @@
 	if(!isliving(mob))
 		return
 	var/mob/living/L = mob
+	var/mob/M = mob
+	if(M.facing_dir)
+		return
 	switch(L.incorporeal_move)
 		if(1)
 			L.loc = get_step(L, direct)

@@ -366,6 +366,12 @@
 		if("defense")
 			if(!usr.stat && isturf(usr.loc) && !usr.restrained())
 				usr:toggle_defense_mode()
+		if("fixeye")
+			usr.face_direction()
+			if(usr.facing_dir)
+				usr.fixeye.icon_state = "fixeye_on"
+			else
+				usr.fixeye.icon_state = "fixeye_off"
 		if("drop")
 			if(usr.client)
 				usr.client.drop_item()

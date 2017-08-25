@@ -315,11 +315,10 @@
 
 	if(abs(dx) < abs(dy))
 		if(dy > 0)	usr.dir = NORTH
-		else		usr.dir = SOUTH
+		else	usr.dir = SOUTH
 	else
 		if(dx > 0)	usr.dir = EAST
-		else		usr.dir = WEST
-
+		else	usr.dir = WEST
 	update_vision_cone() //AWWARE UPDATE ULTRA FIX
 
 // Craft or Build helper (main file can be found here: code/datums/cob_highlight.dm)

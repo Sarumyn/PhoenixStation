@@ -1,7 +1,7 @@
 var/global/list/citizenship_choices = list(
-	"Земл&#255;",
-	"Марс",
-	"Могес",
+	"Earth",
+	"Mars",
+	"Moghes",
 	"Адомай",
 	"Кьербалак"
 	)

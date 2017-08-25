@@ -28,7 +28,6 @@
 /atom/movable/Move(atom/newloc, direct = 0)
 	if(!loc || !newloc || freeze_movement)
 		return FALSE
-
 	var/atom/oldloc = loc
 
 	if(loc != newloc)

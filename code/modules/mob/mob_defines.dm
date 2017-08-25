@@ -29,6 +29,8 @@
 
 	var/obj/screen/defense_icon = null //AWWARE
 
+	var/obj/screen/fixeye = null //AWWARE
+
 	/*A bunch of this stuff really needs to go under their own defines instead of being globally attached to mob.
 	A variable should only be globally attached to turfs/objects/whatever, when it is in fact needed as such.
 	The current method unnecessarily clusters up the variable list, especially for humans (although rearranging won't really clean it up a lot but the difference will be noticable for other mobs).
@@ -96,6 +98,7 @@
 	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
 	var/floating = 0
+	var/facing_dir = null   // Used for the ancient art of moonwalking. AWWARE
 
 	var/name_archive //For admin things like possession
 
