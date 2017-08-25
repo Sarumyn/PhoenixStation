@@ -1,11 +1,10 @@
-# Tau Ceti Classic
+# Phoenix Station 13
 
-[![tauceti.ru](https://img.shields.io/badge/site-tauceti.ru-blue.svg)](http://tauceti.ru/)
-[![RocketChat](https://chat.tauceti.ru/api/v1/shield.svg?type=channel&name=Rocket.Chat&channel=rnd)](http://chat.tauceti.ru/channel/rnd)
+[![phoenixstaion.ru](https://img.shields.io/badge/site-tauceti.ru-blue.svg)](http://phoenixstaion.ru/)
 
 ---
 
-[Baystation12](http://baystation12.net/)-based build with many changes from another upstream and sibling builds like:  
+[TauCeti](http://tauceti.ru/)-Основной билд, также взяты модификации из -
 * [/tg/station13](https://tgstation13.org/)
 * [ParadiseSS13](http://nanotrasen.se/phpBB3/index.php)
 * [/vg/station13](http://ss13.pomf.se/)
