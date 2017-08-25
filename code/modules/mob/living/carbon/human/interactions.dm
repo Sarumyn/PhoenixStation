@@ -78,7 +78,7 @@
 					dat += {"<A href='?src=\ref[usr];interaction=anal'><font color=purple>Fuck ass.</font></A><BR>"}
 				if (mouthfree_p)
 					dat += {"<A href='?src=\ref[usr];interaction=oral'><font color=purple>Fuck mouth.</font></A><BR>"}
-	if (isnude && usr.loc == H.partner.loc && hashands(BP_R_HAND, H))
+	if (isnude && usr.loc == H.partner.loc && hasvagina)
 		dat += {"<font size=3><B>Лоно:</B></font><BR>"}
 		dat += {"<A href='?src=\ref[usr];interaction=mountmouth'><font color=purple>Mount mouth!</font></A><BR><HR>"}
 		if (hasvagina && haspenis_p && (!H.mutilated_genitals) && hasanus_p)
