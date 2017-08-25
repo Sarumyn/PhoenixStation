@@ -156,8 +156,6 @@ mob/living/carbon/human/proc/cum(mob/living/carbon/human/H as mob, mob/living/ca
 	H.druggy = 60
 	H.multiorgasms += 1
 	H.erpcooldown = rand(200, 450)
-	H.druggy = 120
-
 mob/living/carbon/human/proc/fuck(mob/living/carbon/human/H as mob, mob/living/carbon/human/P as mob, var/hole)
 	var/message = ""
 

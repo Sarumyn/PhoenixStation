@@ -85,8 +85,8 @@
 
 	..()
 
-	potenzia = (prob(80) ? rand(9, 14) : pick(rand(5, 13), rand(15, 20)))//Interactions
-	resistenza = (prob(80) ? rand(150, 300) : pick(rand(10, 100), rand(350,600)))
+	potenzia = rand(10, 30)//Interactions
+	resistenza = rand(150, 650)
 
 	if(dna)
 		dna.real_name = real_name
@@ -845,8 +845,8 @@
 
 		else if (href_list["interaction"] == "suckle")
 			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && mouthfree_p)
-				if (H.lust < 8)
-					H.lust = 8
+				if (H.lust < 4)
+					H.lust = 4
 				H.fuck(H, P, "suckle")
 
 		else if (href_list["interaction"] == "fuckyou")
@@ -861,14 +861,14 @@
 					P.visible_message("<span class='danger'>[H] spits at [P]!</span>")
 
 		else if (href_list["interaction"] == "assslap")
-			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && isnude_p && hasanus_p && hashands(BP_R_HAND, H))
+			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && isnude_p && hasanus_p)
 				H.visible_message("<span class='danger'>[H] slaps [P] right on the ass!</span>")
 				if (istype(P.loc, /obj/structure/closet))
 					P.visible_message("<span class='danger'>[H] slaps [P] right on the ass!</span>")
 				playsound(loc, 'sound/interactions/slap.ogg', 50, 1, -1)
 
 		else if (href_list["interaction"] == "touchtail")
-			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && hashands(BP_R_HAND, H) && !H.restrained() && P.species.name == TAJARAN)
+			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && !H.restrained() && P.species.name == TAJARAN)
 				H.fuck(H, P, "touchtail")
 
 		else if (href_list["interaction"] == "vaglick")
@@ -880,7 +880,7 @@
 				H.fuck(H, P, "asslick")
 
 		else if (href_list["interaction"] == "fingering")
-			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && isnude_p && hashands(BP_R_HAND, H) && hasvagina_p)
+			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && isnude_p && hasvagina_p)
 				H.fuck(H, P, "fingering")
 
 		else if (href_list["interaction"] == "blowjob")
@@ -893,21 +893,21 @@
 					if (H.potenzia > 0)
 						H.fuck(H, P, "anal")
 				else
-					H.visible_message("\blue Not erect...")
+					H.visible_message("\blue Not erect... \n[H] Cooldown : [H.erpcooldown]\n[P] Cooldown : [P.erpcooldown]")
 		else if (href_list["interaction"] == "vaginal")
 			if (H.loc == P.loc && isnude_p && isnude && haspenis && hasanus_p)
 				if (H.erpcooldown == 0)
 					if (H.potenzia > 0)
 						H.fuck(H, P, "vaginal")
 				else
-					H.visible_message("\blue Not erect...")
+					H.visible_message("\blue Not erect... \n[H] Cooldown : [H.erpcooldown]\n[P] Cooldown : [P.erpcooldown]")
 		else if (href_list["interaction"] == "oral")
 			if (H.loc == P.loc && isnude && mouthfree_p && haspenis)
 				if (H.erpcooldown == 0)
 					if (H.potenzia > 0)
 						H.fuck(H, P, "oral")
 				else
-					H.visible_message("\blue Not erect...")
+					H.visible_message("\blue Not erect... \n[H] Cooldown : [H.erpcooldown]\n[P] Cooldown : [P.erpcooldown]")
 
 		else if (href_list["interaction"] == "mount")
 			if (H.loc == P.loc && isnude && isnude_p && haspenis_p && hasvagina)
@@ -1733,14 +1733,3 @@
 	if(BP && (BP.status & ORGAN_ROBOT))
 		return FALSE
 	return species.has_organ[organ_check]
-
-/mob/living/carbon/human/proc/has_penis()
-	if(gender == MALE && potenzia > -1 && species.genitals && !mutilated_genitals)
-		return 1
-	else return 0
-
-/mob/living/carbon/human/proc/mutilate_genitals()
-	if(!mutilated_genitals)
-		potenzia = -1
-		mutilated_genitals = 1
-		return 1

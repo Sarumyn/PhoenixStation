@@ -38,7 +38,7 @@
 	if( skipjumpsuit && skipface ) //big suits/masks/helmets make it hard to tell their gender
 		t_He = "Оно"
 		t_his = "их"
-		t_is = "находятся"
+		t_is = "находятс&#255;"
 	else
 		switch(gender)
 			if(MALE)
