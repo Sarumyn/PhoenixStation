@@ -1037,7 +1037,7 @@ var/global/floorIsLava = 0
 	if(matches.len==1)
 		chosen = matches[1]
 	else
-		chosen = input("Select an atom type", "Spawn Atom", matches[1]) as null|anything in matches
+		chosen = input("Select an atom type", "Spawn Phoenix", matches[1]) as null|anything in matches
 		if(!chosen)
 			return
 

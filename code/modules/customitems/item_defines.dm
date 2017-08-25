@@ -298,7 +298,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/lithiumflask //mcgulliver: Wox Derax
 	name = "Lithium Flask"
-	desc = "A flask with a Lithium Atom symbol on it."
+	desc = "A flask with a Lithium Phoenix symbol on it."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "lithiumflask"
 	volume = 50

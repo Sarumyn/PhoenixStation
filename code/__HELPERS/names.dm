@@ -44,7 +44,7 @@ var/religion_name = null
 	return capitalize(name)
 
 /proc/system_name()
-	return "Atom" //Screw Nyx
+	return "Phoenix" //Screw Nyx
 
 /proc/station_name()
 	if (station_name)
@@ -97,7 +97,7 @@ var/religion_name = null
 		if(1)
 			return_name += "[rand(1, 99)]"
 		if(2)
-			return_name += pick("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Atom", "Upsilon", "Phi", "Chi", "Psi", "Omega")
+			return_name += pick("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Phoenix", "Upsilon", "Phi", "Chi", "Psi", "Omega")
 		if(3)
 			return_name += pick("II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX")
 		if(4)

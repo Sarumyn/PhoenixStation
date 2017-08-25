@@ -1,4 +1,4 @@
-var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Mu","Nu","Xi","Omicron","Pi","Rho","Sigma","Atom","Upsilon","Phi","Chi","Psi","Omega")
+var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Mu","Nu","Xi","Omicron","Pi","Rho","Sigma","Phoenix","Upsilon","Phi","Chi","Psi","Omega")
 
 /datum/game_mode
 	var/list/datum/mind/changelings = list()
@@ -289,7 +289,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	else					honorific = "Mr."
 	if(possible_changeling_IDs.len)
 		changelingID = pick(possible_changeling_IDs)
-		if(changelingID == "Atom") // yeah, cuz we can
+		if(changelingID == "Phoenix") // yeah, cuz we can
 			geneticpoints++
 		possible_changeling_IDs -= changelingID
 		changelingID = "[honorific] [changelingID]"

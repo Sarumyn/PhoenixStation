@@ -43,7 +43,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Arrival Shuttle"
 
 /area/shuttle/arrival/pre_game
-	name = "Atom Project Transfer Station 13"
+	name = "Phoenix Project Transfer Station 13"
 	icon_state = "shuttle2"
 
 /area/shuttle/arrival/transit

@@ -9,7 +9,7 @@ var/global/list/citizenship_choices = list(
 var/global/list/home_system_choices = list(
 	"Sol",
 	"Nyx",
-	"Atom",
+	"Phoenix",
 	"Epsilon Ursae Majoris",
 	"S'randarr"
 	)
