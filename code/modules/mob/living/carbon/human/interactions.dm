@@ -467,17 +467,17 @@ mob/living/carbon/human/proc/fuck(mob/living/carbon/human/H as mob, mob/living/c
 			if (istype(P.loc, /obj/structure/closet))
 				P.visible_message("<font color=purple>[H] [message].</font>")
 				playsound(P.loc.loc, 'sound/effects/clang.ogg', 50, 0, 0)
-			H.lust += P.potenzia
-			if (P.lust >= P.resistenza)
-				P.cum(H, P)
+			P.lust += H.potenzia
+			if (H.lust >= H.resistenza)
+				H.cum(P, H)
 			else
-				P.moan()
-			if (H.stat != DEAD && H.stat != UNCONSCIOUS)
-				H.lust += H.potenzia
-				if (H.lust >= H.resistenza)
-					H.cum(H, P, "anus")
+				H.moan()
+			if (P.stat != DEAD && P.stat != UNCONSCIOUS)
+				H.lust += P.potenzia
+				if (P.lust >= P.resistenza)
+					P.cum(H, P, "anus")
 				else
-					H.moan()
+					P.moan()
 			H.do_fucking_animation(P)
 			playsound(loc, "sound/interactions/bang[rand(1, 3)].ogg", 70, 1, -1)
 
