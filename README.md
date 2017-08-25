@@ -1,6 +1,6 @@
 # Phoenix Station 13
 
-[![phoenixstation.ru](https://img.shields.io/badge/site-phoenixstation.ru-blue.svg)](http://phoenixstaion.ru/)
+[![phoenixstation.ru](https://img.shields.io/badge/site-phoenixstation.ru-blue.svg)](http://phoenixstation.ru/)
 
 ---
 
