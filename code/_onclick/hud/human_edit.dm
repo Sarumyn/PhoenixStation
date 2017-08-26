@@ -376,7 +376,6 @@
 	mymob.defense_icon.screen_loc = ui_act_defense
 	mymob.defense_icon.color = ui_color
 	mymob.defense_icon.alpha = ui_alpha
-	src.hotkeybuttons += mymob.defense_icon
 
 	mymob.internals = new /obj/screen()
 	mymob.internals.icon = ui_style
