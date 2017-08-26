@@ -64,7 +64,6 @@ mob/living/update_vision_cone()
 				qdel(I)
 			delay += 10
 		rest_cone_act()
-		get_check_camera()
 		src.client.hidden_atoms = list()
 		src.client.hidden_mobs = list()
 		src.fov.dir = src.dir
@@ -92,11 +91,6 @@ mob/living/update_vision_cone()
 
 mob/proc/rest_cone_act()//For showing and hiding the cone when you rest or lie down.
 	if(resting || lying)
-		hide_cone()
-	else
-		show_cone()
-mob/proc/get_check_camera(obj/machinery/Z)
-	if(Z.fake_cone)
 		hide_cone()
 	else
 		show_cone()

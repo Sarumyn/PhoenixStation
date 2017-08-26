@@ -861,7 +861,7 @@
 					P.visible_message("<span class='danger'>[H] spits at [P]!</span>")
 
 		else if (href_list["interaction"] == "assslap")
-			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && isnude_p && hasanus_p)
+			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && hasanus_p)
 				H.visible_message("<span class='danger'>[H] slaps [P] right on the ass!</span>")
 				if (istype(P.loc, /obj/structure/closet))
 					P.visible_message("<span class='danger'>[H] slaps [P] right on the ass!</span>")

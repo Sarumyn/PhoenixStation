@@ -122,7 +122,6 @@ Class Procs:
 	var/datum/radio_frequency/radio_connection
 	var/radio_filter_out
 	var/radio_filter_in
-	var/fake_cone = 0
 
 /obj/machinery/New()
 	..()
