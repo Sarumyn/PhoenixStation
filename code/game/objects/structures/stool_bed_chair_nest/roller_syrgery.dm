@@ -14,6 +14,3 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "folded"
 	type_bed = /obj/structure/stool/bed/roller/roller_surg
-
-
-
