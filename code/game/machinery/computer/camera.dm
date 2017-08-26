@@ -134,6 +134,8 @@
 		A.client.eye = A.eyeobj
 		return 1
 	set_current(C)
+	//fake_cone = 1
+//	user.update_vision_cone()
 	if(!check_eye(user))
 		return 0
 	use_power(50)
@@ -168,7 +170,6 @@
 		return
 	if(can_access_camera(jump_to))
 		switch_to_camera(user,jump_to)
-
 /obj/machinery/computer/security/proc/set_current(obj/machinery/camera/C)
 	if(current == C)
 		return

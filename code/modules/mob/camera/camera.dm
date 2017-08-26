@@ -5,3 +5,5 @@
 	mouse_opacity = 0
 	see_in_dark = 7
 	invisibility = 101 // No one can see us
+	update_vision_cone()
+	get_check_camera()
