@@ -242,7 +242,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	b_facial		= sanitize_integer(b_facial, 0, 255, initial(b_facial))
 	s_tone			= sanitize_integer(s_tone, -185, 34, initial(s_tone))
 	Growth			= sanitize_integer(Growth, 150, 210, initial(Growth))
-	Weight			= sanitize_integer(Weight, 70, 170, initial(Weight))
+	Weight			= sanitize_integer(Weight, 50, 170, initial(Weight)) //TEST
 	r_skin			= sanitize_integer(r_skin, 0, 255, initial(r_skin))
 	g_skin			= sanitize_integer(g_skin, 0, 255, initial(g_skin))
 	b_skin			= sanitize_integer(b_skin, 0, 255, initial(b_skin))
