@@ -616,6 +616,7 @@ var/list/wood_icons = list("wood","wood-broken")
 					icon_state = "plating"
 					burnt = 0
 					broken = 0
+					update_icon() //May be FIX AWWARE
 				else
 					to_chat(user, "\blue You need more welding fuel to complete this task.")
 
