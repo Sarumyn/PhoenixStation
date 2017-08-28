@@ -399,39 +399,42 @@
 	if ( (get_dist(src, user) > 1 ))
 		if (!istype(user, /mob/living/silicon))
 			user.unset_machine()
-			user << browse(null, "window=solcon")
 			return
 
 	add_fingerprint(user)
 	user.set_machine(src)
 
-	var/t = "<TT><B>Solar Generator Control</B><HR><PRE>"
-	t += "<B>Generated power</B> : [round(lastgen)] W<BR>"
-	t += "Station Rotational Period: [60/abs(SSsun.rate)] minutes<BR>"
-	t += "Station Rotational Direction: [SSsun.rate<0 ? "CCW" : "CW"]<BR>"
-	t += "Star Orientation: [SSsun.angle]&deg ([angle2text(SSsun.angle)])<BR>"
-	t += "Array Orientation: [rate_control(src,"cdir","[cdir]&deg",1,10,60)] ([angle2text(cdir)])<BR>"
-	t += "<BR><HR><BR>"
-	t += "Tracking: "
+	var/t = {"<BR><B>Solar Generator Control</B><HR>"}
+	t += {"<B>Generated power</B> : [round(lastgen)] W
+	<BR>Station Rotational Period: [60/abs(SSsun.rate)] minutes
+    <BR>Station Rotational Direction: [SSsun.rate<0 ? "CCW" : "CW"]
+	<BR>Star Orientation: [SSsun.angle]&deg ([angle2text(SSsun.angle)])
+	<BR>Array Orientation: [rate_control(src,"cdir","[cdir]&deg",1,10,60)] ([angle2text(cdir)])<BR>
+	<BR>Tracking:"}
 	switch(track)
 		if(0)
-			t += "<B>Off</B> <A href='?src=\ref[src];track=1'>Manual</A> <A href='?src=\ref[src];track=2'>Automatic</A><BR>"
+			t += {"<B>Off</B> <A href='?src=\ref[src];track=1'>Manual</A> <A href='?src=\ref[src];track=2'>Automatic</A>"}
 		if(1)
-			t += "<A href='?src=\ref[src];track=0'>Off</A> <B>Manual</B> <A href='?src=\ref[src];track=2'>Automatic</A><BR>"
+			t += {"<A href='?src=\ref[src];track=0'>Off</A> <B>Manual</B> <A href='?src=\ref[src];track=2'>Automatic</A>"}
 		if(2)
-			t += "<A href='?src=\ref[src];track=0'>Off</A> <A href='?src=\ref[src];track=1'>Manual</A> <B>Automatic</B><BR>"
+			t += {"<A href='?src=\ref[src];track=0'>Off</A> <A href='?src=\ref[src];track=1'>Manual</A> <B>Automatic</B>"}
 
-	t += "Manual Tracking Rate: [rate_control(src,"tdir","[trackrate/10]&deg/min ([trackdir<0 ? "CCW" : "CW"])",1,10)]<BR>"
-	t += "Manual Tracking Direction: "
+	t += {"<BR>Manual Tracking Rate: [rate_control(src,"tdir","[trackrate/10]&deg/min ([trackdir<0 ? "CCW" : "CW"])",1,10)]\n"}
+	t += {"<BR>Manual Tracking Direction: \n"}
 	switch(trackdir)
 		if(-1)
-			t += "<A href='?src=\ref[src];trackdir=1'>CW</A> <B>CCW</B><BR>"
+			t += {"<A href='?src=\ref[src];trackdir=1'>CW</A> <B>CCW</B>"}
 		if(1)
-			t += "<B>CW</B> <A href='?src=\ref[src];trackdir=-1'>CCW</A><BR>"
-	t += "<A href='?src=\ref[src];close=1'>Close</A></TT>"
-	user << browse(t, "window=solcon")
-	onclose(user, "solcon")
+			t += {"<B>CW</B> <A href='?src=\ref[src];trackdir=-1'>CCW</A>"}
+	//t += {"<A href='?src=\ref[src];close=1'>Close</A></TT>"}
+	var/datum/browser/popup = new(user, "computer", name, 400, 400)
+	popup.set_content(t)
+	popup.open()
+	onclose(user, "computer")
 	return
+	//user << browse(t, "window=solcon")
+	//onclose(user, "solcon")
+	//return
 
 
 /obj/machinery/power/solar_control/Topic(href, href_list)
