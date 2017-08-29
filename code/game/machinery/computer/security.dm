@@ -369,6 +369,7 @@ What a mess.*/
 		if("Purge All Records")
 			for(var/datum/data/record/R in data_core.security)
 				qdel(R)
+			data_core.security.Cut()
 			temp = "All Security records deleted."
 
 		if("Add Entry")
