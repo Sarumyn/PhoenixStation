@@ -189,7 +189,11 @@
 				else
 		else
 			dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
-	user << browse(text("<HEAD><TITLE>Security Records</TITLE></HEAD><TT>[]</TT>", dat), "window=secure_rec;size=600x400")
+
+	//user << browse(text("<HEAD><TITLE>Security Records</TITLE></HEAD><TT>[]</TT>", dat), "window=secure_rec;size=600x400")
+	var/datum/browser/popup = new(src, "secure_rec", "<div align='center'>Security Records</div>", 600, 400)
+	popup.set_content(dat)
+	popup.open(0)
 	onclose(user, "secure_rec")
 	return
 
@@ -558,12 +562,15 @@ What a mess.*/
 								qdel(R)
 							else
 						qdel(active1)
+						active1 = null
 					if (active2)
 						qdel(active2)
+						active2 = null
 				else
 					temp = "This function does not appear to be working at the moment. Our apologies."
 
 	updateUsrDialog()
+	return
 
 /obj/machinery/computer/secure_data/proc/is_not_allowed(mob/user)
 	return !src.authenticated || user.stat || user.restrained() || (!in_range(src, user) && (!istype(user, /mob/living/silicon)))

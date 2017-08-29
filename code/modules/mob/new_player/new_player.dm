@@ -24,7 +24,7 @@
 
 
 /mob/new_player/proc/new_player_panel_proc()
-	var/output = "<div align='center'><B>New Player Options</B>"
+	var/output = "<center>"
 	output +="<hr>"
 	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
@@ -57,9 +57,9 @@
 			else
 				output += "<p><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A></p>"
 
-	output += "</div>"
+	output += "</div></center>"
 
-	var/datum/browser/popup = new(src, "playersetup", "<div align='center'>New Player Options</div>", 210, 240)
+	var/datum/browser/popup = new(src, "playersetup", "<div align='center'>New Player Options</div>", 250, 265)
 	popup.set_window_options("can_close=0")
 	popup.set_content(output)
 	popup.open(0)
@@ -373,7 +373,12 @@
 			dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
 
 	dat += "</center>"
-	src << browse(dat, "window=latechoices;size=300x640;can_close=1")
+	var/datum/browser/popup = new(src, "latechoices", "", 360, 640)
+	popup.set_content(dat)
+	popup.set_window_options("can_close=1")
+	popup.open(0)
+	onclose(usr, "latechoices")
+	//src << browse(dat, "window=latechoices;size=300x640;can_close=1")
 
 
 /mob/new_player/proc/create_character()
