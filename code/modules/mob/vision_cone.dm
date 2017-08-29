@@ -54,7 +54,7 @@ proc/cone(atom/center = usr, dir = NORTH, list/list = oview(center))
 mob/proc/update_vision_cone()
 	return
 
-mob/living/update_vision_cone()
+mob/update_vision_cone()
 	var/delay = 10
 	if(src.client && src.fov)
 		var/image/I = null
@@ -78,13 +78,12 @@ mob/living/update_vision_cone()
 				if(src.pulling == M)//If we're pulling them we don't want them to be invisible, too hard to play like that.
 					I.override = 0
 
-			//Optional items can be made invisible too. Uncomment this part if you wish to items to be invisible.
-			//var/obj/item/O
-			//for(O in cone(src, OPPOSITE_DIR(src.dir), oview(src)))
-			//	I = image("split", O)
+			//Insible HUD STATUS
+			//for(var/mob/living/carbon/human/P in cone(src, OPPOSITE_DIR(src.dir), view(10, src)))
+			//	I = image("split", P.hud_list[2])
 			//	I.override = 1
 			//	src.client.images += I
-			//	src.client.hidden_atoms += I
+			//	src.client.hidden_huds += I
 
 	else
 		return

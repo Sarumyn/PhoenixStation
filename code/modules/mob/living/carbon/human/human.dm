@@ -375,7 +375,7 @@
 	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
 	<BR>"}
 	//user << browse(dat, text("window=mob[name];size=340x540"))
-	var/datum/browser/popup = new(src, "mob[name]", "<div align='center'>[name]</div>", 340, 540)
+	var/datum/browser/popup = new(user, "mob[name]", "<div align='center'>[name]</div>", 340, 540)
 	popup.set_content(dat)
 	popup.open(0)
 	onclose(user, "mob[name]")
