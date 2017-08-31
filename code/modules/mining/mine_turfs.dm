@@ -415,8 +415,8 @@
 	name = "Mineral deposit"
 	icon_state = "rock"
 
-	var/mineralSpawnChanceList = list("Uranium" = 20, "Platinum" = 20, "Iron" = 30, "Coal" = 25, "Diamond" = 8, "Gold" = 25, "Silver" = 25, "Phoron" = 25,)
-	var/mineralChance = 35  //means 10% chance of this plot changing to a mineral deposit
+	var/mineralSpawnChanceList = list("Uranium" = 40, "Platinum" = 40, "Iron" = 50, "Coal" = 55, "Diamond" = 25, "Gold" = 25, "Silver" = 25, "Phoron" = 25,)
+	var/mineralChance = 65  //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
 	if (prob(mineralChance) && !mineral)
@@ -440,8 +440,8 @@
 
 /turf/simulated/mineral/random/high_chance
 	icon_state = "rock_highchance"
-	mineralChance = 60
-	mineralSpawnChanceList = list("Uranium" = 35, "Platinum" = 45, "Diamond" = 30, "Gold" = 45, "Silver" = 50, "Phoron" = 50)
+	mineralChance = 80
+	mineralSpawnChanceList = list("Uranium" = 55, "Platinum" = 75, "Diamond" = 60, "Gold" = 65, "Silver" = 60, "Phoron" = 60)
 
 /turf/simulated/mineral/random/high_chance/New()
 	icon_state = "rock"
@@ -449,15 +449,15 @@
 
 /turf/simulated/mineral/random/low_chance
 	icon_state = "rock_lowchance"
-	mineralChance = 15
-	mineralSpawnChanceList = list("Uranium" = 5, "Platinum" = 3, "Iron" = 70, "Coal" = 80, "Diamond" = 5, "Gold" = 5, "Silver" = 5, "Phoron" = 5)
+	mineralChance = 40
+	mineralSpawnChanceList = list("Uranium" = 15, "Platinum" = 15, "Iron" = 80, "Coal" = 60, "Diamond" = 25, "Gold" = 25, "Silver" = 25, "Phoron" = 25)
 
 /turf/simulated/mineral/random/low_chance/New()
 	icon_state = "rock"
 	..()
 
 /turf/simulated/mineral/random/labormineral
-	mineralSpawnChanceList = list("Uranium" = 5, "Platinum" = 3, "Iron" = 7, "Coal" = 80, "Diamond" = 5, "Gold" = 5, "Silver" = 5, "Phoron" = 5)
+	mineralSpawnChanceList = list("Uranium" = 25, "Platinum" = 25, "Iron" = 25, "Coal" = 25, "Diamond" = 25, "Gold" = 25, "Silver" = 25, "Phoron" = 25)
 	icon_state = "rock_labor"
 
 /turf/simulated/mineral/random/labormineral/New()
