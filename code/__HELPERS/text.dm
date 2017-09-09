@@ -51,6 +51,14 @@
 /proc/strip_html(t,limit=MAX_MESSAGE_LEN)
 	return copytext((sanitize(strip_html_simple(t))),1,limit)
 
+proc/TextPreview(var/string,var/len=40)
+	if(lentext(string) <= len)
+		if(!lentext(string))
+			return "\[...\]"
+		else
+			return sanitize_simple(string)
+	else
+		return "[revert_ja(copytext(string, 1, 37))]..."
 
 //Returns null if there is any bad text in the string
 /proc/reject_bad_text(text, max_length=512)
