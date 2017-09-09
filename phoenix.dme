@@ -1022,6 +1022,7 @@
 #include "code\modules\client\preferences_faction.dm"
 #include "code\modules\client\preferences_savefile.dm"
 #include "code\modules\client\preferences_toggles.dm"
+#include "code\modules\client\character menu\flavor.dm"
 #include "code\modules\client\character menu\general.dm"
 #include "code\modules\client\character menu\global.dm"
 #include "code\modules\client\character menu\load_slot.dm"
