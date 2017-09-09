@@ -178,8 +178,8 @@
 
 	. += 						"<br><br>"
 
-	. += 						"<b>Описание внешности:</b>"
-	. += 						" <a href='byond://?src=\ref[user];preference=flavor_text;task=input'>[length(flavor_text)>0?"[sanitize_popup(copytext(flavor_text, 1, 3))]...":"\[...\]"]</a>"
+	. += 						"<b>Описание внешности:</b><br>"
+	. += 						" <a href='byond://?src=\ref[user];preference=flavor_text;task=input;flavor_text=open'>Set Flavor</a>"
 	. += 					"</td>"
 	. += 				"</tr>"
 	. += 			"</table>"	//Backstory table end
@@ -501,10 +501,18 @@
 					religion = choice
 
 				if("flavor_text")
-					var/msg = sanitize(copytext(input(usr,"Set the flavor text in your 'examine' verb.","Flavor Text",html_decode(revert_ja(flavor_text))) as message, 1, MAX_MESSAGE_LEN))
-
-					if(msg != null)
-						flavor_text = msg
+					switch(href_list["flavor_text"])
+						if("open")
+						if("general")
+							var/msg = sanitize(copytext(input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(revert_ja(flavor_texts[href_list["flavor_text"]]))) as message, 1, MAX_MESSAGE_LEN))
+							if(msg)
+								flavor_texts[href_list["flavor_text"]] = revert_ja(msg)
+						else
+							var/msg = sanitize(copytext(input(usr,"Set the flavor text for your [href_list["flavor_text"]].","Flavor Text",html_decode(revert_ja(flavor_texts[href_list["flavor_text"]]))) as message, 1, MAX_MESSAGE_LEN))
+							if(msg)
+								flavor_texts[href_list["flavor_text"]] = revert_ja(msg)
+					SetFlavorText(user)
+					return 1
 
 				if("organs")
 					var/menu_type = input(user, "Menu") as null|anything in list("Limbs", "Organs")

@@ -31,7 +31,7 @@
 
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
-	var/body_type = "unknown" //BODY_TYPE_UPDATE_AWWARE
+	var/body_type = "Null" //BODY_TYPE_UPDATE_AWWARE
 
 	var/underwear = 1	//Which underwear the player wants
 	var/undershirt = 0	//Which undershirt the player wants.
@@ -89,3 +89,5 @@
 
 	var/full_prosthetic    // We are a robutt.
 	var/robolimb_count = 0 // Number of robot limbs.
+
+	var/list/flavor_texts = list()

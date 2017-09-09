@@ -135,6 +135,46 @@
 
 	CHANGELING_STATPANEL_POWERS(null)
 
+/mob/living/carbon/human/print_flavor_text(var/shrink = 1)
+	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
+	var/head_exposed = 1
+	var/face_exposed = 1
+	var/eyes_exposed = 1
+	var/torso_exposed = 1
+	var/arms_exposed = 1
+	var/legs_exposed = 1
+	var/hands_exposed = 1
+	var/feet_exposed = 1
+
+	for(var/obj/item/clothing/C in equipment)
+		if(C.body_parts_covered & HEAD)
+			head_exposed = 0
+		if(C.body_parts_covered & FACE)
+			face_exposed = 0
+		if(C.body_parts_covered & EYES)
+			eyes_exposed = 0
+		if(C.body_parts_covered & UPPER_TORSO)
+			torso_exposed = 0
+		if(C.body_parts_covered & ARMS)
+			arms_exposed = 0
+		if(C.body_parts_covered & HANDS)
+			hands_exposed = 0
+		if(C.body_parts_covered & LEGS)
+			legs_exposed = 0
+		if(C.body_parts_covered & FEET)
+			feet_exposed = 0
+
+	flavor_text = ""
+	for (var/T in flavor_texts)
+		if(flavor_texts[T] && flavor_texts[T] != "")
+			if((T == "general") || (T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
+				flavor_text += revert_ja(flavor_texts[T])
+				flavor_text += "\n\n"
+	if(!shrink)
+		return flavor_text
+	else
+		return ..()
+
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)
 		flash_eyes()

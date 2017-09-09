@@ -277,7 +277,7 @@
 
 	if(popup)
 		memory()
-
+/*
 /mob/proc/update_flavor_text()
 	set src in usr
 	if(usr != src)
@@ -289,12 +289,22 @@
 		msg = html_encode(msg)
 
 		flavor_text = msg
+*/
+/mob/proc/update_flavor_text()
+	set src in usr
+	if(usr != src)
+		to_chat(usr, "No.")
+	var/msg = input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null
+
+	if(msg != null)
+		flavor_text = msg
 
 /mob/proc/warn_flavor_changed()
 	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
 		to_chat(src, "<h2 class='alert'>OOC Warning:</h2>")
 		to_chat(src, "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>")
 
+/*
 /mob/proc/print_flavor_text()
 	if(flavor_text && flavor_text != "")
 		var/msg = flavor_text
@@ -302,7 +312,55 @@
 			return "\blue [msg]"
 		else
 			return "\blue [copytext(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
+*/
+/mob/proc/print_flavor_text()
+	if (flavor_text && flavor_text != "")
+		var/msg = replacetext(flavor_text, "\n", " ")
+		if(lentext(msg) <= 40)
+			return "\blue [sanitize(msg)]"
+		else
+			return "\blue [sanitize(copytext(msg, 1, 37))]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
+/*
+/mob/living/carbon/human/print_flavor_text(var/shrink = 1)
+	var/list/equipment = list(src.head, src.wear_mask, src.glasses, src.w_uniform, src.wear_suit, src.gloves, src.shoes)
+	var/head_exposed = 1
+	var/face_exposed = 1
+	var/eyes_exposed = 1
+	var/torso_exposed = 1
+	var/arms_exposed = 1
+	var/legs_exposed = 1
+	var/hands_exposed = 1
+	var/feet_exposed = 1
 
+	for(var/obj/item/clothing/C in equipment)
+		if(C.body_parts_covered & HEAD)
+			head_exposed = 0
+		if(C.body_parts_covered & FACE)
+			face_exposed = 0
+		if(C.body_parts_covered & EYES)
+			eyes_exposed = 0
+		if(C.body_parts_covered & UPPER_TORSO)
+			torso_exposed = 0
+		if(C.body_parts_covered & ARMS)
+			arms_exposed = 0
+		if(C.body_parts_covered & HANDS)
+			hands_exposed = 0
+		if(C.body_parts_covered & LEGS)
+			legs_exposed = 0
+		if(C.body_parts_covered & FEET)
+			feet_exposed = 0
+
+	flavor_text = ""
+	for (var/T in flavor_texts)
+		if(flavor_texts[T] != "")
+			if((T == "general") || (T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
+				flavor_text += flavor_texts[T]
+				flavor_text += "\n\n"
+	if(!shrink)
+		return flavor_text
+	else
+		return ..()
+*/
 //mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
 /mob/verb/examinate(atom/A as mob|obj|turf in view())
 	set name = "Examine"
@@ -472,7 +530,7 @@
 		src << browse(null, t1)
 
 	if(href_list["flavor_more"])
-		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, sanitize_popup(replacetext(flavor_text, "\n", "<BR>"))), text("window=[];size=500x200", name))
+		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, sanitize_plus_popup(replacetext(flavor_text, "\n", "<BR>"))), text("window=[];size=500x200", name))
 		onclose(usr, "[name]")
 	if(href_list["flavor_change"])
 		update_flavor_text()
