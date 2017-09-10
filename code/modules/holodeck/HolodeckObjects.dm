@@ -254,7 +254,9 @@ obj/structure/stool/bed/chair/holochair
 	item_state = "basketball"
 	desc = "Here's your chance, do your dance at the Space Jam."
 	w_class = 4 //Stops people from hiding it in their bags/pockets
-	throw_speed = 1
+	density = 1
+	throwpass = 1
+	throw_speed = 2
 	throw_range = 5
 
 /obj/structure/holohoop
@@ -265,7 +267,7 @@ obj/structure/stool/bed/chair/holochair
 	anchored = 1
 	density = 1
 	throwpass = 1
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 
 /obj/structure/holohoop/attackby(obj/item/weapon/W, mob/user)

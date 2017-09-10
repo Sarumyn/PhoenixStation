@@ -15,6 +15,9 @@
 	desc = "A tank of oxygen."
 	icon_state = "oxygen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+	throwpass = 1
+	throw_speed = 2
+	throw_range = 6
 
 
 	New()
@@ -47,6 +50,9 @@
 	desc = "A tank with an N2O/O2 gas mix."
 	icon_state = "anesthetic"
 	item_state = "an_tank"
+	throwpass = 1
+	throw_speed = 2
+	throw_range = 6
 
 /obj/item/weapon/tank/anesthetic/New()
 	..()
@@ -69,6 +75,9 @@
 	name = "air tank"
 	desc = "Mixed anyone?"
 	icon_state = "oxygen"
+	throwpass = 1
+	throw_speed = 2
+	throw_range = 6
 
 
 	examine(mob/user)
@@ -97,7 +106,9 @@
 	item_state = "plasma"
 	flags = CONDUCT
 	slot_flags = null	//they have no straps!
-
+	throwpass = 1
+	throw_speed = 2
+	throw_range = 6
 
 /obj/item/weapon/tank/phoron/New()
 	..()
@@ -130,6 +141,9 @@
 	slot_flags = SLOT_BELT
 	w_class = 2.0
 	force = 4.0
+	throwpass = 1
+	throw_speed = 2
+	throw_range = 6
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	volume = 2 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
 
