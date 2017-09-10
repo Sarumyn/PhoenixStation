@@ -165,19 +165,26 @@
 	return
 
 /obj/item/weapon/melee/telebaton/attack(mob/target, mob/living/user)
+	var/mob/living/carbon/human/M = user
 	if(on)
-		if ((CLUMSY in user.mutations) && prob(50))
-			to_chat(user, "\red You club yourself over the head.")
-			user.Weaken(3 * force)
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				H.apply_damage(2 * force, BRUTE, BP_HEAD)
+		switch(M.a_intent)
+			if("hurt")
+				if ((CLUMSY in user.mutations) && prob(50))
+					to_chat(user, "\red You club yourself over the head.")
+					user.Weaken(3 * force)
+					if(ishuman(user))
+						var/mob/living/carbon/human/H = user
+						H.apply_damage(2 * force, BRUTE, BP_HEAD)
+					else
+						user.take_bodypart_damage(2 * force)
+					return
+				if(..())
+					playsound(src.loc, "swing_hit", 50, 1, -1)
+					return
 			else
-				user.take_bodypart_damage(2 * force)
-			return
-		if(..())
-			playsound(src.loc, "swing_hit", 50, 1, -1)
-			return
+				var/mob/living/carbon/human/H = target
+				H.apply_effect(7, WEAKEN, 0)
+				playsound(src.loc, "swing_hit", 25, 1, -1)
 	else
 		return ..()
 
