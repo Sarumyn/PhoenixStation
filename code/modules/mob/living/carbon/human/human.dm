@@ -838,7 +838,6 @@
 
 ///////Interactions!!///////
 	if(href_list["interaction"])
-
 		if (usr.stat == DEAD || usr.stat == UNCONSCIOUS || usr.restrained())
 			return
 
@@ -869,6 +868,8 @@
 		var/isnude = H.is_nude()
 
 		var/isnude_p = P.is_nude()
+
+		log_admin("[H] >> [href_list["interaction"]] << [P] >> ERP MENU")
 //#======================================================VARS======================================================#//
 //#======================================================HREF's - ERP======================================================#//
 		if (href_list["interaction"] == "kiss")
@@ -891,7 +892,6 @@
 				if (H.lust < 4)
 					H.lust = 4
 				H.fuck(H, P, "suckle")
-
 		else if (href_list["interaction"] == "fuckyou")
 			H.visible_message("<span class='danger'>[H] gives [P] the finger!</span>")
 			if (istype(P.loc, /obj/structure/closet) && P.loc == H.loc)
