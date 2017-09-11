@@ -11,6 +11,7 @@
 	var/const/duration = 13 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/is_glass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
 	var/is_transparent = 1 //Determines whether an overlay of liquid should be added to bottle when it fills
+	var/canopen = 0
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(mob/living/target, mob/living/user)
 
@@ -62,6 +63,9 @@
 	if(user.a_intent != "hurt" || !is_glass)
 		return ..()
 
+	if(!canopen)
+		to_chat(user, "<span class='notice'>You need to open the drink!</span>")
+		return
 
 	force = 15 //Smashing bottles over someoen's head hurts.
 
@@ -311,6 +315,7 @@
 	icon_state = "orangejuice"
 	item_state = "carton"
 	is_glass = 0
+	canopen = 1
 	New()
 		..()
 		reagents.add_reagent("orangejuice", 100)
@@ -331,6 +336,7 @@
 	icon_state = "tomatojuice"
 	item_state = "carton"
 	is_glass = 0
+	canopen = 1
 	New()
 		..()
 		reagents.add_reagent("tomatojuice", 100)
@@ -341,6 +347,7 @@
 	icon_state = "limejuice"
 	item_state = "carton"
 	is_glass = 0
+	canopen = 1
 	New()
 		..()
 		reagents.add_reagent("limejuice", 100)
@@ -364,3 +371,10 @@
 		reagents.add_reagent("beer", 100)
 		src.pixel_x = rand(-10.0, 10)
 		src.pixel_y = rand(-10.0, 10)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/attack_self(mob/user)
+	if (!canopen && is_glass)
+		playsound(src.loc,'sound/effects/can_open3.ogg', rand(30,50), 1)
+		to_chat(user, "<span class='notice'>You open the drink with an audible pop!</span>")
+		canopen = 1
+	else
+		return

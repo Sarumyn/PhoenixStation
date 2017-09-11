@@ -1,9 +1,10 @@
 /obj/item/weapon/reagent_containers/food/drinks/cans
 	var/canopened = 0
+	var/brokencan = 0
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/attack_self(mob/user)
 	if (!canopened)
-		playsound(src.loc,'sound/effects/canopen.ogg', rand(10,50), 1)
+		playsound(src.loc,'sound/effects/can_open.ogg', rand(10,50), 1)
 		to_chat(user, "<span class='notice'>You open the drink with an audible pop!</span>")
 		canopened = 1
 	else
@@ -16,14 +17,84 @@
 	if (!canopened)
 		to_chat(user, "<span class='notice'>You need to open the drink!</span>")
 		return
+	if(brokencan)
+		to_chat(user, "<span class='notice'>Can has broken...</span>")
+		return
 	var/datum/reagents/R = src.reagents
 	var/fillevel = gulp_size
 
+	if(!R.total_volume && user.a_intent == "hurt") //SPAG. Code :peka:
+		switch(icon_state)
+			if("sodawater")
+				icon_state = "sodawater_broken"
+				brokencan = 1
+				name = "broken soda can"
+				user.visible_message("<font color=purple>[user] сильно сминает алюминиевую банку, насколько это возможно.</font>")
+			if("tonic")
+				icon_state = "tonic_broken"
+				brokencan = 1
+				name = "broken tonic can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("cola")
+				icon_state = "cola_broken"
+				brokencan = 1
+				name = "broken cola can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("purple_can")
+				icon_state = "purple_can_broken"
+				brokencan = 1
+				name = "broken purple can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("ice_tea_can")
+				icon_state = "ice_tea_can_broken"
+				brokencan = 1
+				name = "broken tea can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("energy_drink")
+				icon_state = "energy_drink_broken"
+				brokencan = 1
+				name = "broken energy drink can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("thirteen_loko")
+				icon_state = "thirteen_loko_broken"
+				brokencan = 1
+				name = "broken loko can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("space_mountain_wind")
+				icon_state = "space_mountain_wind_broken"
+				brokencan = 1
+				name = "broken mountain wind can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("dr_gibb")
+				icon_state = "dr_gibb_broken"
+				brokencan = 1
+				name = "broken dr. Gib can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("starkist")
+				icon_state = "starkist_broken"
+				brokencan = 1
+				name = "broken starkist can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("space-up")
+				icon_state = "space-up_broken"
+				brokencan = 1
+				name = "broken space-up can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("lemon-lime")
+				icon_state = "lemon-lime_broken"
+				brokencan = 1
+				name = "broken lemon-lime can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
+			if("grapesoda")
+				icon_state = "grapesoda_broken"
+				brokencan = 1
+				name = "broken grapesoda can"
+				user.visible_message("<font color=purple>[user] сминает алюминиевую банку.</font>")
 	if(!R.total_volume || !R)
 		to_chat(user, "\red None of [src] left, oh no!")
 		return 0
-
 	if(M == user)
+		if(brokencan) return
 		to_chat(M, "\blue You swallow a gulp of [src].")
 		if(reagents.total_volume)
 			reagents.trans_to_ingest(M, gulp_size)
