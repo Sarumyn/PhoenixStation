@@ -157,7 +157,7 @@
 	//	anus = 1
 /mob/living/carbon/human/proc/fuck(mob/living/carbon/human/H as mob, mob/living/carbon/human/P as mob, var/hole)
 	var/text = ""
-	log_admin("[H] >> [hole] << [P] >> ERP MENU")
+	log_admin("[H] ckey {[H.ckey]} >> [hole] << [P] ckey {[P.ckey]} >> ERP MENU")
 	switch(hole)
 		if("touchtail")
 			text = pick("нежно трогает кончик хвоста у [P].", "грубо трогает кончик хвоста у [P] иногда надавлива&#255;.")

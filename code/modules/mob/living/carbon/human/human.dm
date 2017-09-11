@@ -869,7 +869,7 @@
 
 		var/isnude_p = P.is_nude()
 
-		log_admin("[H] >> [href_list["interaction"]] << [P] >> ERP MENU")
+		log_admin("[H] ckey {[H.ckey]} >> [href_list["interaction"]] << [P] ckey {[P.ckey]} >> ERP MENU")
 //#======================================================VARS======================================================#//
 //#======================================================HREF's - ERP======================================================#//
 		if (href_list["interaction"] == "kiss")
