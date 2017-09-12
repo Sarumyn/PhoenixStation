@@ -5,7 +5,7 @@
 	slot_flags = SLOT_BELT
 	item_state = "electronic"
 	throwforce = 5
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 	w_class = 2
 	origin_tech = "syndicate=4;magnets=4"

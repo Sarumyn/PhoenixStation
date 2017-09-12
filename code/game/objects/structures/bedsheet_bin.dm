@@ -13,7 +13,7 @@ LINEN BINS
 	slot_flags = SLOT_BACK
 	layer = 4.0
 	throwforce = 1
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 2
 	w_class = 2.0
 	item_color = "white"

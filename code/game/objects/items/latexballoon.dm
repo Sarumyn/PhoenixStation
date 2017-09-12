@@ -6,7 +6,7 @@
 	force = 0
 	throwforce = 0
 	w_class = 2.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 15
 	var/state
 	var/datum/gas_mixture/air_contents = null

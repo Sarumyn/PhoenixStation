@@ -6,7 +6,7 @@
 	var/block=0
 	var/datum/dna2/record/buf=null
 	var/s_time = 10.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 	w_class = 1.0
 	var/uses = 1

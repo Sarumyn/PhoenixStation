@@ -6,7 +6,7 @@
 	flags = CONDUCT
 	force = 3.0
 	throwforce = 2.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 4
 	w_class = 2
 	attack_verb = list("called", "rang")
@@ -226,7 +226,7 @@
 	icon_state = "caution"
 	force = 1.0
 	throwforce = 3.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 	w_class = 2.0
 	attack_verb = list("warned", "cautioned", "smashed")
@@ -354,7 +354,7 @@
 	icon_state = "staff"
 	force = 3.0
 	throwforce = 5.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 	w_class = 2.0
 	flags = NOSHIELD
@@ -381,7 +381,7 @@
 	item_state = "stick"
 	force = 3.0
 	throwforce = 5.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 	w_class = 2.0
 	flags = NOSHIELD
@@ -511,7 +511,7 @@
 	throwforce = 5.0
 	sharp = 1
 	edge = 1
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 3
 	w_class = 4.0
 	flags = NOSHIELD

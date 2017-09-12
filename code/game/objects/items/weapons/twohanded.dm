@@ -155,7 +155,7 @@
 	desc = "Handle with care."
 	force = 3
 	throwforce = 5.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 	w_class = 2.0
 	item_color = "green"

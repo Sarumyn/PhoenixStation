@@ -207,7 +207,7 @@ proc/cardinalrange(center)
 	w_class = 4.0
 	flags = CONDUCT
 	throwforce = 5
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 2
 	m_amt = 100
 	w_amt = 2000

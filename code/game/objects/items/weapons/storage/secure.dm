@@ -154,7 +154,7 @@
 	item_state = "secure-r"
 	desc = "A large briefcase with a digital locking system."
 	force = 8.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 4
 	w_class = 4.0
 

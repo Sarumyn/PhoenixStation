@@ -7,7 +7,7 @@
 	anchored = 0
 	force = 8
 	throwforce = 10
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 2
 
 	var/fuel = 10000

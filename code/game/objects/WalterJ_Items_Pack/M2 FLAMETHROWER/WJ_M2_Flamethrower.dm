@@ -73,7 +73,7 @@
 	flags = CONDUCT
 	force = 3.0
 	throwforce = 10.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 	w_class = 3.0
 	m_amt = 500

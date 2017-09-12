@@ -14,7 +14,7 @@
 	icon_state = "axe0"
 	force = 40.0
 	throwforce = 25.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 	w_class = 3.0
 	flags = CONDUCT | NOSHIELD | NOBLOODY
@@ -34,7 +34,7 @@
 	icon_state = "sword0"
 	force = 3.0
 	throwforce = 5.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 5
 	w_class = 2.0
 	flags = NOSHIELD | NOBLOODY
@@ -84,7 +84,7 @@
 	sharp = 1
 	edge = 1
 	throwforce = 1//Throwing or dropping the item deletes it.
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 1
 	w_class = 4.0//So you can't hide it in your pocket or some such.
 	flags = NOSHIELD | NOBLOODY | DROPDEL
