@@ -54,18 +54,24 @@
 	underlays.Cut()
 	underlays += filler
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/attack_self(mob/user)
+	if (!canopen && is_glass)
+		playsound(src.loc,'sound/effects/can_open.ogg', rand(30,50), 1)
+		to_chat(user, "<span class='notice'>You open the drink with an audible pop!</span>")
+		canopen = 1
+	else
+		return
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/attack(mob/living/target, mob/living/user)
+	if(!canopen)
+		to_chat(user, "<span class='notice'>You need to open the drink!</span>")
+		return
 
 	if(!target)
 		return
 
 	if(user.a_intent != "hurt" || !is_glass)
 		return ..()
-
-	if(!canopen)
-		to_chat(user, "<span class='notice'>You need to open the drink!</span>")
-		return
 
 	force = 15 //Smashing bottles over someoen's head hurts.
 
@@ -371,10 +377,3 @@
 		reagents.add_reagent("beer", 100)
 		src.pixel_x = rand(-10.0, 10)
 		src.pixel_y = rand(-10.0, 10)
-/obj/item/weapon/reagent_containers/food/drinks/bottle/attack_self(mob/user)
-	if (!canopen && is_glass)
-		playsound(src.loc,'sound/effects/can_open3.ogg', rand(30,50), 1)
-		to_chat(user, "<span class='notice'>You open the drink with an audible pop!</span>")
-		canopen = 1
-	else
-		return
