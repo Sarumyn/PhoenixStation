@@ -106,6 +106,7 @@
 	if(!(crumpled==1))
 		crumpled = 1
 		icon_state = "crumpled"
+		throw_speed = 2
 		throw_range = 5
 		overlays = null
 	else
