@@ -140,7 +140,7 @@
 		output += "Nothing"
 	output += "</div>"
 	return output
-
+/*
 /obj/mecha/working/ripley/Destroy()
 	for(var/mob/M in src)
 		if(M==src.occupant)
@@ -155,3 +155,16 @@
 			T.Entered(A)
 		step_rand(A)
 	return ..()
+*/ //JUNKYARD
+/obj/mecha/working/ripley/proc/drop_cargo()
+	for(var/atom/movable/A in cargo)
+		A.forceMove(get_turf(src))
+		step_rand(A)
+
+/obj/mecha/working/ripley/destroy()
+	drop_cargo()
+	..()
+
+/obj/mecha/working/ripley/Destroy()
+	drop_cargo()
+	return ..() //JUNKYARD

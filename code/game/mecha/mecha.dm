@@ -93,6 +93,10 @@
 /obj/mecha/Destroy()
 	go_out()
 	poi_list.Remove(src)
+	for(var/mob/M in src)
+		M.loc = get_turf(src)
+		M.loc.Entered(M)
+		step_rand(M)
 	mechas_list -= src //global mech list
 	return ..()
 
@@ -350,7 +354,7 @@
 		if(ignore_threshold || src.health*100/initial(src.health)<src.internal_damage_threshold)
 			var/obj/item/mecha_parts/mecha_equipment/destr = safepick(equipment)
 			if(destr)
-				destr.destroy()
+				qdel(destr)
 	return
 
 /obj/mecha/proc/hasInternalDamage(int_dam_flag=null)
@@ -508,6 +512,7 @@
 	return
 
 /obj/mecha/proc/destroy()
+/*
 	spawn()
 		go_out()
 		var/turf/T = get_turf(src)
@@ -552,7 +557,25 @@
 		spawn(0)
 			qdel(src)
 	return
-
+*/
+	go_out() //JUNKYARD
+	var/turf/T = get_turf(src)
+	if(wreckage)
+		var/obj/effect/decal/mecha_wreckage/WR = new wreckage(T)
+		WR.reliability = rand(33) + 15
+		for(var/obj/item/mecha_parts/mecha_equipment/E in equipment)
+			WR.salvage["crowbar"] += E.type
+		if(cell)
+			WR.salvage["crowbar"] += cell.type
+			qdel(cell)
+		if(internal_tank)
+			WR.salvage["crowbar"] += internal_tank.type
+			qdel(internal_tank)
+		for(var/obj/item/mecha_parts/mecha_equipment/E in equipment)
+			qdel(E)
+		if(prob(60))
+			explosion(T, 0, 0, 1, 3)
+		qdel(src)
 /obj/mecha/ex_act(severity)
 	src.log_message("Affected by explosion of severity: [severity].",1)
 	if(prob(src.deflect_chance))
@@ -560,16 +583,16 @@
 		src.log_append_to_last("Armor saved, changing severity to [severity].")
 	switch(severity)
 		if(1.0)
-			src.destroy()
+			destroy()
 		if(2.0)
 			if (prob(30))
-				src.destroy()
+				destroy()
 			else
 				src.take_damage(initial(src.health)/2)
 				src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),1)
 		if(3.0)
 			if (prob(5))
-				src.destroy()
+				destroy()
 			else
 				src.take_damage(initial(src.health)/5)
 				src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),1)

@@ -22,6 +22,8 @@
 	var/area			= null
 	var/time_died_as_mouse = null //when the client last died as a mouse
 
+	var/time_joined_as_spacebum = null
+
 	var/adminhelped = 0
 
 		///////////////

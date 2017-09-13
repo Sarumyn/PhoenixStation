@@ -733,6 +733,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Medbay"
 	icon_state = "medbay"
 
+//JUNKYARD
+/area/awaymission/junkyard
+	name = "Junkyard"
+	icon_state = "away"
+
 //Medbay is a large area, these additional areas help level out APC load.
 /area/medical/hallway
 	icon_state = "medbay2"

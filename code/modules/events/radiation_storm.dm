@@ -5,7 +5,7 @@
 
 /datum/event/radiation_storm/announce()
 	// Don't do anything, we want to pack the announcement with the actual event
-
+/*
 /datum/event/radiation_storm/start()
 	spawn()
 		world << sound('sound/AI/radiation.ogg')
@@ -56,3 +56,9 @@
 			deltimer(timer_maint_revoke_id)
 			timer_maint_revoke_id = 0
 		timer_maint_revoke_id = addtimer(CALLBACK(GLOBAL_PROC, .proc/revoke_maint_all_access, FALSE), 600, TIMER_UNIQUE|TIMER_STOPPABLE) // Want to give them time to get out of maintenance.
+	*/ //JUNK
+/datum/event/radiation_storm/start()
+	world << sound('sound/AI/radiation.ogg')
+	command_alert("High levels of radiation detected near the station. Please evacuate into one of the shielded maintenance tunnels.", "Anomaly Alert")
+	make_maint_all_access(FALSE)
+	SSweather.run_weather("radiation storm",ZLEVEL_STATION)

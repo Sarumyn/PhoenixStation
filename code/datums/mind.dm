@@ -1596,7 +1596,7 @@
 /mob/living/carbon/human/mind_initialize()
 	..()
 	if(!mind.assigned_role)
-		mind.assigned_role = "Test Subject"	//default
+		mind.assigned_role = "default"	//default JUNKYARD
 
 //MONKEY
 /mob/living/carbon/monkey/mind_initialize()

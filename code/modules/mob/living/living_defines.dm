@@ -2,6 +2,7 @@
 	see_invisible = SEE_INVISIBLE_LIVING
 
 	//Health and life related vars
+	sight = SEE_BLACKNESS
 	var/maxHealth = 100 //Maximum health that should be possible.
 	var/health = 100 	//A mob's health
 

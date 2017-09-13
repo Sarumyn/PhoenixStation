@@ -2236,6 +2236,10 @@
 						A.friendc = 1
 				message_admins("[key_name_admin(usr)] turned all AIs into best friends.")
 			if("floorlava")
+				SSweather.run_weather("the floor is lava", ZLEVEL_STATION)
+			if("advanceddarkness")
+				SSweather.run_weather("advanced darkness", ZLEVEL_STATION)
+				/*
 				if(floorIsLava)
 					to_chat(usr, "The floor is lava already.")
 					return
@@ -2290,6 +2294,7 @@
 							F.update_icon()
 					floorIsLava = 0
 				return
+				*/ //JUNK
 			if("virus")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","V")

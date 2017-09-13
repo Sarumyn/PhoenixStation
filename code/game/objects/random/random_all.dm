@@ -4,11 +4,11 @@
 	desc = "This is a random item."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "gift"
-	spawn_nothing_percentage = 85
+	spawn_nothing_percentage = 80
 /obj/random/misc/all/item_to_spawn()
 		return pick(\
 						prob(10);/obj/random/meds/medical_supply,\
-						prob(30);/obj/random/tools/tech_supply/guaranteed,\
+						prob(10);/obj/random/tools/tech_supply/guaranteed,\
 						prob(50);/obj/random/foods/food_without_garbage,\
 						prob(10);/obj/random/science/science_supply,\
 						prob(5);/obj/random/cloth/random_cloth,\

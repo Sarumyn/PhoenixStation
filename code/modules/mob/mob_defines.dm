@@ -230,6 +230,8 @@
 	var/turf/listed_turf = null  //the current turf being examined in the stat panel
 	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
+	var/list/weather_immunities = list() //JUNK
+
 	var/list/active_genes=list()
 
 	var/fake_death = 0 //New changeling statis

@@ -1,7 +1,7 @@
 ////////////////////////////////
 ///// Construction datums //////
 ////////////////////////////////
-
+/*
 /datum/construction/mecha/custom_action(step, atom/used_atom, mob/user)
 	if(istype(used_atom, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/W = used_atom
@@ -34,23 +34,25 @@
 		else
 			S.use(5)
 	return 1
-
+*/ //JUNKYARD
 /datum/construction/reversible/mecha/custom_action(index, diff, atom/used_atom, mob/user)
 	if(istype(used_atom, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/W = used_atom
-		if (W.remove_fuel(0, user))
+		if (W.remove_fuel(3, user))
 			playsound(holder, 'sound/items/Welder2.ogg', 50, 1)
+			return 1
 		else
+			to_chat(user, ("There's not enough fuel."))
 			return 0
 	else if(istype(used_atom, /obj/item/weapon/wrench))
 		playsound(holder, 'sound/items/Ratchet.ogg', 50, 1)
-
+		return 1
 	else if(istype(used_atom, /obj/item/weapon/screwdriver))
 		playsound(holder, 'sound/items/Screwdriver.ogg', 50, 1)
-
+		return 1
 	else if(istype(used_atom, /obj/item/weapon/wirecutters))
 		playsound(holder, 'sound/items/Wirecutter.ogg', 50, 1)
-
+		return 1
 	else if(istype(used_atom, /obj/item/weapon/cable_coil))
 		var/obj/item/weapon/cable_coil/C = used_atom
 		if(C.amount<4)
@@ -59,6 +61,7 @@
 		else
 			C.use(4)
 			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
+			return 1
 	else if(istype(used_atom, /obj/item/stack))
 		var/obj/item/stack/S = used_atom
 		if(S.amount < 5)
@@ -66,7 +69,13 @@
 			return 0
 		else
 			S.use(5)
-	return 1
+			return 1
+	if(istype(used_atom, /obj))
+		var/obj/part = used_atom
+		if(part.crit_fail || part.reliability < 50)
+			user.visible_message("[user] was unable to connect [used_atom] to [holder].", "You failed to connect [used_atom] to [holder]")
+			return 0
+	return 1 //JUNKYARD
 
 
 /datum/construction/mecha/ripley_chassis
@@ -76,16 +85,6 @@
 					 list("key"=/obj/item/mecha_parts/part/ripley_left_leg),//4
 					 list("key"=/obj/item/mecha_parts/part/ripley_right_leg)//5
 					)
-
-	custom_action(step, atom/used_atom, mob/user)
-		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
-		holder.overlays += used_atom.icon_state+"+o"
-		qdel(used_atom)
-		return 1
-
-	action(atom/used_atom,mob/user)
-		return check_all_steps(used_atom,user)
-
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/ripley(const_holder)
@@ -287,16 +286,6 @@
 					 list("key"=/obj/item/mecha_parts/part/gygax_right_leg),//5
 					 list("key"=/obj/item/mecha_parts/part/gygax_head)
 					)
-
-	custom_action(step, atom/used_atom, mob/user)
-		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
-		holder.overlays += used_atom.icon_state+"+o"
-		qdel(used_atom)
-		return 1
-
-	action(atom/used_atom,mob/user)
-		return check_all_steps(used_atom,user)
-
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/gygax(const_holder)
@@ -306,7 +295,6 @@
 		spawn()
 			qdel(src)
 		return
-
 
 /datum/construction/reversible/mecha/gygax
 	result = "/obj/mecha/combat/gygax"
@@ -567,17 +555,6 @@
 					 list("key"=/obj/item/mecha_parts/part/ripley_right_leg),//5
 					 list("key"=/obj/item/clothing/suit/fire)//6
 					)
-
-	custom_action(step, atom/used_atom, mob/user)
-		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
-		holder.overlays += used_atom.icon_state+"+o"
-		user.drop_item()
-		qdel(used_atom)
-		return 1
-
-	action(atom/used_atom,mob/user)
-		return check_all_steps(used_atom,user)
-
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/firefighter(const_holder)
@@ -793,16 +770,6 @@
 					 list("key"=/obj/item/mecha_parts/part/honker_right_leg),//5
 					 list("key"=/obj/item/mecha_parts/part/honker_head)
 					)
-
-	action(atom/used_atom,mob/user)
-		return check_all_steps(used_atom,user)
-
-	custom_action(step, atom/used_atom, mob/user)
-		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
-		holder.overlays += used_atom.icon_state+"+o"
-		qdel(used_atom)
-		return 1
-
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/mecha/honker(const_holder)
@@ -870,16 +837,6 @@
 					 list("key"=/obj/item/mecha_parts/part/durand_right_leg),//5
 					 list("key"=/obj/item/mecha_parts/part/durand_head)
 					)
-
-	custom_action(step, atom/used_atom, mob/user)
-		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
-		holder.overlays += used_atom.icon_state+"+o"
-		qdel(used_atom)
-		return 1
-
-	action(atom/used_atom,mob/user)
-		return check_all_steps(used_atom,user)
-
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/durand(const_holder)
@@ -1153,18 +1110,6 @@
 					 list("key"=/obj/item/mecha_parts/part/phazon_head)
 					)
 
-	custom_action(step, atom/used_atom, mob/user)
-		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
-		holder.overlays += used_atom.icon_state+"+o"
-		qdel(used_atom)
-		return 1
-
-	action(atom/used_atom,mob/user)
-		return check_all_steps(used_atom,user)
-
-
-
-
 /datum/construction/mecha/odysseus_chassis
 	steps = list(list("key"=/obj/item/mecha_parts/part/odysseus_torso),//1
 					 list("key"=/obj/item/mecha_parts/part/odysseus_head),//2
@@ -1383,16 +1328,6 @@
 					 list("key"=/obj/item/mecha_parts/part/vindicator_right_leg),//5
 					 list("key"=/obj/item/mecha_parts/part/vindicator_head)
 					)
-
-	custom_action(step, atom/used_atom, mob/user)
-		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
-		holder.overlays += used_atom.icon_state+"+o"
-		qdel(used_atom)
-		return 1
-
-	action(atom/used_atom,mob/user)
-		return check_all_steps(used_atom,user)
-
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/vindicator(const_holder)
@@ -1663,16 +1598,6 @@
 					 list("key"=/obj/item/mecha_parts/part/ultra_right_leg),//5
 					 list("key"=/obj/item/mecha_parts/part/ultra_head)
 					)
-
-	custom_action(step, atom/used_atom, mob/user)
-		user.visible_message("[user] has connected [used_atom] to [holder].", "You connect [used_atom] to [holder]")
-		holder.overlays += used_atom.icon_state+"+o"
-		qdel(used_atom)
-		return 1
-
-	action(atom/used_atom,mob/user)
-		return check_all_steps(used_atom,user)
-
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/ultra(const_holder)
