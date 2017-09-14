@@ -834,7 +834,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 		update_icon = FALSE
 		regenerate_icons()
 
-	update_vision_cone()
+	//update_vision_cone()
 
 	return canmove
 

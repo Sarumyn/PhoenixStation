@@ -319,7 +319,7 @@
 	else
 		if(dx > 0)	usr.dir = EAST
 		else	usr.dir = WEST
-	update_vision_cone() //AWWARE UPDATE ULTRA FIX
+	//update_vision_cone() //AWWARE
 
 // Craft or Build helper (main file can be found here: code/datums/cob_highlight.dm)
 /mob/proc/cob_click(client/C, list/modifiers)

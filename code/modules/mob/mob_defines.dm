@@ -99,6 +99,7 @@
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
 	var/floating = 0
 	var/facing_dir = null   // Used for the ancient art of moonwalking. AWWARE
+	var/walking = 0
 
 	var/name_archive //For admin things like possession
 

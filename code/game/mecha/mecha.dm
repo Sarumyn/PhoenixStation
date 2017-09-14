@@ -159,7 +159,7 @@
 		sleep(delayfraction)
 		if(!src || !user || !user.canmove || !(user.loc == T))
 			return 0
-	user.hide_cone()
+	//user.hide_cone()
 	return 1
 
 /obj/mecha/examine(mob/user)
@@ -1166,7 +1166,7 @@
 	var/atom/movable/mob_container
 	if(ishuman(occupant))
 		mob_container = src.occupant
-		occupant.show_cone()
+	//	occupant.show_cone()
 	else if(istype(occupant, /mob/living/carbon/brain))
 		var/mob/living/carbon/brain/brain = occupant
 		mob_container = brain.container

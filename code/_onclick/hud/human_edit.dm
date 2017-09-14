@@ -427,14 +427,14 @@
 	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
 
 	//AWWARE
-	mymob.fov = new /obj/screen()
-	mymob.fov.icon = 'icons/hide.dmi'
-	mymob.fov.icon_state = "combat"
-	mymob.fov.name = " "
-	mymob.fov.screen_loc = "1,1"
-	mymob.fov.mouse_opacity = 0
-	mymob.fov.layer = UNDER_HUD_LAYER
-	mymob.fov.plane = HUD_PLANE
+	//mymob.fov = new /obj/screen()
+	//mymob.fov.icon = 'icons/hide.dmi'
+	//mymob.fov.icon_state = "combat"
+	//mymob.fov.name = " "
+	//mymob.fov.screen_loc = "1,1"
+	//mymob.fov.mouse_opacity = 0
+	//mymob.fov.layer = UNDER_HUD_LAYER
+	//mymob.fov.plane = HUD_PLANE
 
 
 	if(mymob.leap_icon)
@@ -463,7 +463,7 @@
 
 	mymob.client.screen = list()
 	//AWWARE 3
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel ,mymob.defense_icon, mymob.internals, mymob.healths, mymob.healthdoll, mymob.pullin, mymob.gun_setting_icon, lingchemdisplay, lingstingdisplay, mymob.fov) //, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel ,mymob.defense_icon, mymob.internals, mymob.healths, mymob.healthdoll, mymob.pullin, mymob.gun_setting_icon, lingchemdisplay, lingstingdisplay) //, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach ) //mymob.fov
 	mymob.client.screen += src.adding + src.hotkeybuttons
 	mymob.client.screen += mymob.client.void
 	inventory_shown = 0

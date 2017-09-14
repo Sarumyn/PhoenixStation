@@ -292,7 +292,8 @@ var/global/list/scrap_base_cache = list()
 		/obj/random/meds/medical_supply/,
 		/obj/random/meds/medical_supply/,
 		/obj/random/materials/rods_scrap,
-		/obj/item/weapon/shard
+		/obj/item/weapon/shard,
+		/obj/item/weapon/broken_can
 	)
 
 /obj/structure/scrap/vehicle
@@ -308,7 +309,8 @@ var/global/list/scrap_base_cache = list()
 		/obj/random/tools/tech_supply/guaranteed,
 		/obj/random/materials/rods_scrap,
 		/obj/random/materials/metal_scrap,
-		/obj/item/weapon/shard
+		/obj/item/weapon/shard,
+		/obj/item/weapon/broken_can
 	)
 
 /obj/structure/scrap/food
@@ -323,7 +325,8 @@ var/global/list/scrap_base_cache = list()
 		/obj/random/foods/food_without_garbage,
 		/obj/random/foods/food_without_garbage,
 		/obj/item/weapon/shard,
-		/obj/random/materials/rods_scrap
+		/obj/random/materials/rods_scrap,
+		/obj/item/weapon/broken_can
 	)
 
 /obj/structure/scrap/guns
@@ -375,9 +378,15 @@ var/global/list/scrap_base_cache = list()
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 		/obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
 		/obj/item/brain,
+		/obj/item/weapon/broken_can,
 		/obj/item/weapon/tank/phoron
 	)
 
+/obj/item/weapon/broken_can
+	name = "broken can"
+	desc = "This is a broken scrap..."
+	icon = 'icons/obj/scrap_loot.dmi'
+	icon_state = "b_c_1"
 
 /obj/structure/scrap/poor
 	icontype = "poor"
@@ -390,7 +399,8 @@ var/global/list/scrap_base_cache = list()
 		/obj/random/misc/all,
 		/obj/random/misc/all,
 		/obj/item/weapon/shard,
-		/obj/random/materials/rods_scrap
+		/obj/random/materials/rods_scrap,
+		/obj/item/weapon/broken_can
 	)
 
 /obj/structure/scrap/poor/large

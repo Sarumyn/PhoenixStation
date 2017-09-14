@@ -1,145 +1,239 @@
-//https://github.com/TauCetiStation/TauCetiClassic/pull/1723 << [WIP] Планета - свалка, возвращение бомжа
-#define STARTUP_STAGE 1
-#define MAIN_STAGE 2
-#define WIND_DOWN_STAGE 3
-#define END_STAGE 4
+//Different types of weather.
 
-/datum/weather
-	var/name = "space wind"
-	var/desc = "Heavy gusts of wind blanket the area, periodically knocking down anyone caught in the open."
+/datum/weather/floor_is_lava //The Floor is Lava: Makes all turfs damage anyone on them unless they're standing on a solid object.
+	name = "the floor is lava"
+	desc = "The ground turns into surprisingly cool lava, lightly damaging anything on the floor."
 
-	var/telegraph_message = "<span class='warning'>The wind begins to pick up.</span>" //The message displayed in chat to foreshadow the weather's beginning
-	var/telegraph_duration = 300 //In deciseconds, how long from the beginning of the telegraph until the weather begins
-	var/telegraph_sound //The sound file played to everyone on an affected z-level
-	var/telegraph_overlay //The overlay applied to all tiles on the z-level
+	telegraph_message = "<span class='warning'>Waves of heat emanate from the ground...</span>"
+	telegraph_duration = 150
 
-	var/weather_message = "<span class='userdanger'>The wind begins to blow ferociously!</span>" //Displayed in chat once the weather begins in earnest
-	var/weather_duration = 1200 //In deciseconds, how long the weather lasts once it begins
-	var/weather_duration_lower = 1200 //See above - this is the lowest possible duration
-	var/weather_duration_upper = 1500 //See above - this is the highest possible duration
-	var/weather_sound
-	var/weather_overlay
-	var/weather_color = null
-	var/weather_alpha = 255
+	weather_message = "<span class='userdanger'>The floor is lava! Get on top of something!</span>"
+	weather_duration_lower = 300
+	weather_duration_upper = 600
+	weather_overlay = "lava"
 
-	var/end_message = "<span class='danger'>The wind relents its assault.</span>" //Displayed once the wather is over
-	var/end_duration = 300 //In deciseconds, how long the "wind-down" graphic will appear before vanishing entirely
-	var/end_sound
-	var/end_overlay
+	end_message = "<span class='danger'>The ground cools and returns to its usual form.</span>"
+	end_duration = 0
 
+	area_type = /area
+	protected_areas = list(/area/space)
+	target_z = ZLEVEL_STATION
 
-	var/area_type = /area/space //Types of area to affect
-	var/list/impacted_areas = list() //Areas to be affected by the weather, calculated when the weather begins
-	var/list/protected_areas = list()//Areas that are protected and excluded from the affected areas.
-	var/target_z = ZLEVEL_STATION //The z-level to affect
+	overlay_layer = 2.1 //Covers floors only
+	immunity_type = "lava"
 
-	var/overlay_layer = AREA_LAYER //Since it's above everything else, this is the layer used by default. TURF_LAYER is below mobs and walls if you need to use that.
-	var/aesthetic = FALSE //If the weather has no purpose other than looks
-	var/immunity_type = "storm" //Used by mobs to prevent them from being affected by the weather
-
-	var/stage = END_STAGE //The stage of the weather, from 1-4
-
-	var/probability = FALSE //Percent chance to happen if there are other possible weathers on the z-level
-
-/datum/weather/New()
-	..()
-	SSweather.existing_weather |= src
-
-/datum/weather/Destroy()
-	SSweather.existing_weather -= src
-	..()
-
-/datum/weather/proc/telegraph()
-	if(stage == STARTUP_STAGE)
+/datum/weather/floor_is_lava/impact(mob/living/L)
+	for(var/obj/structure/O in L.loc)
+		if(O.density)
+			return
+	if(L.loc.density)
 		return
-	stage = STARTUP_STAGE
-	var/list/affectareas = list()
-	for(var/V in get_areas(area_type))
-		affectareas += V
-	for(var/V in protected_areas)
-		affectareas -= get_areas(V)
-	for(var/V in affectareas)
-		var/area/A = V
-		if(A.z == target_z)
-			impacted_areas |= A
-	weather_duration = rand(weather_duration_lower, weather_duration_upper)
-	update_areas()
-	for(var/V in player_list)
-		var/mob/M = V
-		if(M.z == target_z)
-			if(telegraph_message)
-				to_chat(M, telegraph_message)
-			if(telegraph_sound)
-				SEND_SOUND(M, sound(telegraph_sound))
-	addtimer(CALLBACK(src, .proc/start), telegraph_duration)
-
-/datum/weather/proc/start()
-	if(stage >= MAIN_STAGE)
+	if(!L.client) //Only sentient people are going along with it!
 		return
-	stage = MAIN_STAGE
-	update_areas()
-	for(var/V in player_list)
-		var/mob/M = V
-		if(M.z == target_z)
-			if(weather_message)
-				to_chat(M, weather_message)
-			if(weather_sound)
-				SEND_SOUND(M, sound(weather_sound))
-	START_PROCESSING(SSweather, src)
-	addtimer(CALLBACK(src, .proc/wind_down), weather_duration)
+	L.adjustFireLoss(3)
 
-/datum/weather/proc/wind_down()
-	if(stage >= WIND_DOWN_STAGE)
-		return
-	stage = WIND_DOWN_STAGE
-	update_areas()
-	for(var/V in player_list)
-		var/mob/M = V
-		if(M.z == target_z)
-			if(end_message)
-				to_chat(M, end_message)
-			if(end_sound)
-				SEND_SOUND(M, sound(end_sound))
-	STOP_PROCESSING(SSweather, src)
-	addtimer(CALLBACK(src, .proc/end), end_duration)
 
-/datum/weather/proc/end()
-	if(stage == END_STAGE)
-		return 1
-	stage = END_STAGE
-	update_areas()
 
-/datum/weather/proc/can_impact(mob/living/L) //Can this weather impact a mob?
-	var/turf/mob_turf = get_turf(L)
-	if(mob_turf && (mob_turf.z != target_z))
-		return
-	if(immunity_type in L.weather_immunities)
-		return
-	if(!(get_area(L) in impacted_areas))
-		return
-	return 1
 
-/datum/weather/proc/impact(mob/living/L) //What effect does this weather have on the hapless mob?
-	return
 
-/datum/weather/proc/update_areas()
+/datum/weather/advanced_darkness //Advanced Darkness: Restricts the vision of all affected mobs to a single tile in the cardinal directions.
+	name = "advanced darkness"
+	desc = "Everything in the area is effectively blinded, unable to see more than a foot or so around itself."
+
+	telegraph_message = "<span class='warning'>The lights begin to dim... is the power going out?</span>"
+	telegraph_duration = 150
+
+	weather_message = "<span class='userdanger'>This isn't your average everday darkness... this is <i>advanced</i> darkness!</span>"
+	weather_duration_lower = 300
+	weather_duration_upper = 300
+	overlay_layer = 10
+	end_message = "<span class='danger'>At last, the darkness recedes.</span>"
+	end_duration = 0
+
+	area_type = /area
+	target_z = ZLEVEL_STATION
+
+/datum/weather/advanced_darkness/update_areas()
 	for(var/V in impacted_areas)
-		var/area/N = V
-		N.layer = overlay_layer
-		N.icon = 'icons/effects/weather_effects.dmi'
-		N.color = weather_color
-		N.alpha = weather_alpha
-		switch(stage)
-			if(STARTUP_STAGE)
-				N.icon_state = telegraph_overlay
-			if(MAIN_STAGE)
-				N.icon_state = weather_overlay
-			if(WIND_DOWN_STAGE)
-				N.icon_state = end_overlay
-			if(END_STAGE)
-				N.color = null
-				N.icon_state = ""
-				N.icon = 'icons/turf/areas.dmi'
-				N.layer = AREA_LAYER //Just default back to normal area stuff since I assume setting a var is faster than initial
-				N.set_opacity(FALSE)
-				N.alpha = initial(N.alpha)
+		var/area/A = V
+		if(stage == MAIN_STAGE)
+			A.invisibility = 0
+			A.set_opacity(TRUE)
+			A.layer = overlay_layer
+			A.icon = 'icons/effects/weather_effects.dmi'
+			A.icon_state = "darkness"
+		else
+			A.invisibility = INVISIBILITY_MAXIMUM
+			A.set_opacity(FALSE)
+
+
+/datum/weather/scrap_storm //Ash Storms: Common happenings on lavaland. Heavily obscures vision and deals heavy fire damage to anyone caught outside.
+	name = "scrap storm"
+	desc = "An intense atmospheric storm lifts ash off of the planet's surface and billows it down across the area, dealing intense fire damage to the unprotected."
+
+	telegraph_message = "<span class='boldwarning'>An eerie moan rises on the wind. Sheets of sand blacken the horizon. Seek shelter.</span>"
+	telegraph_duration = 300
+	telegraph_sound = 'sound/ambience/ash_storm_windup.ogg'
+	telegraph_overlay = "light_ash"
+
+	weather_message = "<span class='userdanger'><i>Smoldering clouds of scorching trash billow down around you! Get inside!</i></span>"
+	weather_duration_lower = 600
+	weather_duration_upper = 1500
+	weather_sound = 'sound/ambience/ash_storm_start.ogg'
+	weather_overlay = "ash_storm"
+	weather_alpha = 200
+	overlay_layer = 10
+	end_message = "<span class='boldannounce'>The shrieking wind whips away the last of the ash and falls to its usual murmur. It should be safe to go outside now.</span>"
+	end_duration = 300
+	end_sound = 'sound/ambience/ash_storm_end.ogg'
+	end_overlay = "light_ash"
+
+	area_type = /area/awaymission/junkyard
+	target_z = ZLEVEL_JUNKYARD
+
+	immunity_type = "ash"
+	var/list/tornados = list()
+	probability = 10
+
+/datum/weather/scrap_storm/proc/is_scrap_immune(mob/living/L)
+	if(istype(L.loc, /obj/mecha)) //Mechs are immune
+		return TRUE
+	if(istype(L.loc, /mob/living) && L.loc != L) //Matryoshka check
+		return is_scrap_immune(L.loc)
+	return FALSE //RIP you
+
+/datum/weather/scrap_storm/start()
+	..()
+	var/list/turfs = get_area_turfs(area_type)
+	for(var/i = 1 to 4)
+		var/turf/wheretospawn = pick(turfs)
+		if(!wheretospawn.density)
+			var/obj/singularity/scrap_ball/new_tornado = new /obj/singularity/scrap_ball(wheretospawn)
+			tornados += new_tornado
+
+/datum/weather/scrap_storm/end()
+	for(var/obj/singularity/scrap_ball/del_tornado in tornados)
+		qdel(del_tornado)
+	..()
+
+/datum/weather/scrap_storm/impact(mob/living/L)
+	if(is_scrap_immune(L))
+		return
+	L.apply_effect(0.5,BRUTE,0)
+	L.apply_effect(1,AGONY,0)
+
+/datum/weather/scrap_storm/emberfall //Emberfall: An ash storm passes by, resulting in harmless embers falling like snow. 10% to happen in place of an ash storm.
+	name = "emberfall"
+	desc = "A passing ash storm blankets the area in harmless embers."
+
+	weather_message = "<span class='notice'>Gentle embers waft down around you like grotesque snow. The storm seems to have passed you by...</span>"
+	weather_sound = 'sound/ambience/ash_storm_windup.ogg'
+	weather_overlay = "light_ash"
+
+	end_message = "<span class='notice'>The emberfall slows, stops. Another layer of hardened soot to the ground beneath your feet.</span>"
+
+	aesthetic = TRUE
+
+	probability = 60
+
+/datum/weather/rad_storm
+	name = "radiation storm"
+	desc = "A cloud of intense radiation passes through the area dealing rad damage to those who are unprotected."
+
+	telegraph_duration = 400
+	telegraph_message = "<span class='danger'>The air begins to grow warm.</span>"
+
+	weather_message = "<span class='userdanger'><i>You feel waves of heat wash over you! Find shelter!</i></span>"
+	weather_overlay = "ash_storm"
+	weather_duration_lower = 600
+	weather_duration_upper = 1500
+	weather_color = "green"
+	weather_overlay = "ash_storm"
+	weather_alpha = 40
+	weather_sound = 'sound/AI/radiation.ogg'
+	overlay_layer = 2.1
+	end_duration = 100
+	end_message = "<span class='notice'>The air seems to be cooling off again.</span>"
+
+	area_type = /area
+	protected_areas = list(/area/maintenance, /area/crew_quarters)
+	target_z = ZLEVEL_STATION
+
+	immunity_type = "rad"
+
+/datum/weather/rad_storm/telegraph()
+	..()
+	status_alarm("alert")
+
+
+/datum/weather/rad_storm/impact(mob/living/L)
+	var/resist = L.getarmor(null, "rad")
+	if(prob(40))
+		if(ishuman(L))
+			var/mob/living/carbon/human/H = L
+			if(H.dna && H.dna.species)
+				if(prob(max(0,100-resist)) && prob(10))
+					if (prob(75))
+						randmutb(H) // Applies bad mutation
+					else
+						randmutg(H) // Applies good mutation
+					domutcheck(H,null,MUTCHK_FORCED)
+		L.apply_effect((rand(40,70)),IRRADIATE,0)
+
+/datum/weather/rad_storm/end()
+	if(..())
+		return
+	command_alert("The station has passed the radiation belt. Please report to medbay if you experience any unusual symptoms. Maintenance will lose all access again shortly.", "Anomaly Alert")
+	if(timer_maint_revoke_id)
+		deltimer(timer_maint_revoke_id)
+		timer_maint_revoke_id = 0
+	timer_maint_revoke_id = addtimer(CALLBACK(GLOBAL_PROC, .proc/revoke_maint_all_access, FALSE), 600, TIMER_UNIQUE|TIMER_STOPPABLE) // Want to give them time to get out of maintenance.
+
+
+/datum/weather/rad_storm/proc/status_alarm(command)	//Makes the status displays show the radiation warning for those who missed the announcement.
+	var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
+
+	if(!frequency)
+		return
+
+	var/datum/signal/status_signal = new
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
+	status_signal.source = a
+	status_signal.transmission_method = 1
+	status_signal.data["command"] = "shuttle"
+
+	if(command == "alert")
+		status_signal.data["command"] = "alert"
+		status_signal.data["picture_state"] = "radiation"
+
+	frequency.post_signal(src, status_signal)
+
+
+/datum/weather/acid_rain
+	name = "acid rain"
+	desc = "Some stay dry and others feel the pain"
+
+	telegraph_duration = 400
+	telegraph_message = "<span class='danger'>Stinging droplets start to fall upon you..</span>"
+	telegraph_sound = 'sound/ambience/acidrain_start.ogg'
+
+	weather_message = "<span class='userdanger'><i>Your skin melts underneath the rain!</i></span>"
+	weather_overlay = "acid_rain"
+	weather_duration_lower = 600
+	weather_duration_upper = 1500
+	weather_sound = 'sound/ambience/acidrain_mid.ogg'
+	overlay_layer = 10
+	end_duration = 100
+	end_message = "<span class='notice'>The rain starts to dissipate.</span>"
+	end_sound = 'sound/ambience/acidrain_end.ogg'
+
+	area_type = /area/awaymission/junkyard
+	target_z = ZLEVEL_JUNKYARD
+
+	immunity_type = "acid" // temp
+
+	probability = 30
+
+
+/datum/weather/acid_rain/impact(mob/living/L)
+	L.take_overall_damage(0,1)

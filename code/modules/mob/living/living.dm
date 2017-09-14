@@ -662,10 +662,10 @@
 		for(var/mob/living/carbon/slime/M in view(1,src))
 			M.UpdateFeed(src)
 
-	for(var/mob/M in oview(src))
-		M.update_vision_cone()
+	//for(var/mob/M in oview(src))
+	//	M.update_vision_cone()
 
-	update_vision_cone()
+	//update_vision_cone()
 
 /mob/living/proc/makeTrail(turf/T, mob/living/M)
 	var/blood_exists = 0
@@ -708,9 +708,9 @@
 			if(M.dna)
 				TH.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 //EXPORT BAY12 AWWARE
-/mob/living/set_dir()
-	..()
-	update_vision_cone()
+//mob/living/set_dir()
+//	..()
+//	update_vision_cone()
 //EXPORT BAY12 AWWARE
 /mob/living/reset_layer()
 	if(hiding)
