@@ -104,16 +104,8 @@
 
 /datum/weather/scrap_storm/start()
 	..()
-	var/list/turfs = get_area_turfs(area_type)
-	for(var/i = 1 to 4)
-		var/turf/wheretospawn = pick(turfs)
-		if(!wheretospawn.density)
-			var/obj/singularity/scrap_ball/new_tornado = new /obj/singularity/scrap_ball(wheretospawn)
-			tornados += new_tornado
 
 /datum/weather/scrap_storm/end()
-	for(var/obj/singularity/scrap_ball/del_tornado in tornados)
-		qdel(del_tornado)
 	..()
 
 /datum/weather/scrap_storm/impact(mob/living/L)
@@ -208,7 +200,7 @@
 
 	frequency.post_signal(src, status_signal)
 
-
+/*
 /datum/weather/acid_rain
 	name = "acid rain"
 	desc = "Some stay dry and others feel the pain"
@@ -237,3 +229,4 @@
 
 /datum/weather/acid_rain/impact(mob/living/L)
 	L.take_overall_damage(0,1)
+*/

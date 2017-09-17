@@ -37,9 +37,9 @@ var/datum/subsystem/mapping/SSmapping
 	var/list/turfs_to_init = block(locate(1, 1, 1), locate(world.maxx, world.maxy, world.maxz))
 	for(var/thing in turfs_to_init)
 		var/turf/T = thing
-		if(istype(T, /turf/simulated/mineral/airfull/junkyard))
+		if(istype(T, /turf/simulated/mineral/airless/junkyard))
 			T.surround_by_scrap()
-		if(istype(T, /turf/simulated/floor/plating/ironsand/junkyard))
+		if(istype(T, /turf/simulated/floor/plating/airless/ironsand/junkyard))
 			T.surround_by_scrap()
 		CHECK_TICK
 

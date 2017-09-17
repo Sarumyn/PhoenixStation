@@ -1,3 +1,4 @@
+/*
 /obj/singularity/scrap_ball
 	name = "Tornado"
 	desc = "Holy shit, run!."
@@ -58,3 +59,4 @@
 
 /obj/singularity/scrap_ball/Bumped(atom/A)
 	consume(A)
+*/

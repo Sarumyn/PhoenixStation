@@ -181,7 +181,6 @@
 	icon_state = "medicalbelt"
 /obj/random/cloth/belt/item_to_spawn()
 	return pick(\
-			prob(2);/obj/item/weapon/storage/belt/security/German, \
 			prob(8);/obj/item/weapon/storage/belt/security, \
 			prob(8);/obj/item/weapon/storage/belt/medical, \
 			prob(8);/obj/item/weapon/storage/belt/utility, \

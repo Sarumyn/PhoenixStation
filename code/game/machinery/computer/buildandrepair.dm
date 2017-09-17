@@ -225,7 +225,17 @@
 	name = "Circuit board (Mining Shuttle flight computer)"
 	build_path = /obj/machinery/computer/mine_sci_shuttle/flight_comp
 	origin_tech = "programming=2"
+//JUNKYARD SHUTTLE CIRC
+/obj/item/weapon/circuitboard/scrap_shuttle_console
+	name = "Circuit board (Scrap Asteroid Shuttle)"
+	build_path = /obj/machinery/computer/scrap_shuttle_console
+	origin_tech = "programming=2"
 
+/obj/item/weapon/circuitboard/scrap_shuttle_console/flight_comp
+	name = "Circuit board (Scrap Asteroid Shuttle flight computer)"
+	build_path = /obj/machinery/computer/scrap_shuttle_console/flight_comp
+	origin_tech = "programming=2"
+//JUNKYARD SHUTTLE CIRC
 /obj/item/weapon/circuitboard/HolodeckControl // Not going to let people get this, but it's just here for future
 	name = "Circuit board (Holodeck Control)"
 	build_path = /obj/machinery/computer/HolodeckControl

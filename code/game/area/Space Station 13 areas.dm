@@ -136,7 +136,17 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/shuttle/mining/outpost
 	icon_state = "shuttle"
+//JUNKYARD SHUTTLE
+/area/shuttle/junkyard_shuttle
+	name = "Junkyard Shuttle"
+	music = "music/escape.ogg"
 
+/area/shuttle/junkyard_shuttle/station
+	icon_state = "shuttle2"
+
+/area/shuttle/junkyard_shuttle/outpost
+	icon_state = "shuttle"
+//JUNKYARD SHUTTLE
 /area/shuttle/transport1/centcom
 	icon_state = "shuttle"
 	name = "Transport Shuttle Centcom"
@@ -737,6 +747,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/awaymission/junkyard
 	name = "Junkyard"
 	icon_state = "away"
+
+//JUNKYARD2
+/area/awaymission/junkBase
+	name = "JunkyardBase"
+	icon_state = "away2"
 
 //Medbay is a large area, these additional areas help level out APC load.
 /area/medical/hallway

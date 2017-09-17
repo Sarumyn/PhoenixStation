@@ -83,4 +83,5 @@ obj/structure/closet/secure_closet/recycler/New()
 	new /obj/item/clothing/head/soft/trash(src)
 	new /obj/item/clothing/mask/breath(src)
 	new /obj/item/clothing/suit/recyclervest(src)
+	new /obj/item/weapon/survivalcapsule(src)
 	return

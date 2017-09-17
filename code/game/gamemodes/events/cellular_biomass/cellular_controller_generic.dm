@@ -174,7 +174,7 @@
 	if(!parent || newgrip > 0)
 		var/obj/structure/cellular_biomass/BM = new walls_type(location)
 		if (istype(location,/turf/space))
-			location:ChangeTurf(/turf/simulated/floor/plating/ironsand)
+			location:ChangeTurf(/turf/simulated/floor/plating/airless/ironsand)
 		BM.grip = newgrip
 		growth_queue += BM
 		biomass += BM

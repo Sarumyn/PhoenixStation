@@ -1007,6 +1007,7 @@
 #include "code\modules\Awware\scrap_asteroid\main_weather.dm"
 #include "code\modules\Awware\scrap_asteroid\pre_main_weather.dm"
 #include "code\modules\Awware\scrap_asteroid\weather_types.dm"
+#include "code\modules\Awware\shuttles\scrap_asteroid_shuttle.dm"
 #include "code\modules\cargo\console.dm"
 #include "code\modules\cargo\export_scanner.dm"
 #include "code\modules\cargo\exports.dm"
